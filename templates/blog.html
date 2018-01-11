@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main class="container">
+    <div>
+        <h1>Build A Blog</h1>
+        <form method="GET" action="/blog">
+            <p>No post yet</p>
+            <ul>
+                {% for blog in blogs %}
+                    <a href="/blog?id={{blog.id}}">{{ blog.title }}</a>
+                        <ul>
+                            <li class="blog-post-body">{{ blog.body }}</li>
+                              <div><small>By:
+                                <a href="{{ url_for('blog', blog=blog.id )}}" class="author">{{ blog.title }}</a>
+                              </div>
+                        </ul>
+                    </li>
+                  <br>
+                  <hr/>
+                {% endfor %}
+            </ul>
+          </form>
+    </div>
+</main>
+<p>Blog</p>
+{% endblock %}

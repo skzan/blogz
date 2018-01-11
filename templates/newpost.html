@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main class="container">
+
+    <h1>Add a Post Body</h1>
+    <form method="POST" action="/newpost">
+        <div class="forms">{{ title }}
+          <td><label for="blog_title">Title</label></td>
+                    <td>
+                        <input name="blog_title" type="text" value=""/>
+                          <p class="error-message">{{ blog_title_error }}</p>
+        </div>
+
+        <div id="blog_body">{{ body }}
+          <td><label for="username">Username</label></td>
+                    <td>
+                        <input name="blog_body" type="text" value=""/>
+                          <p class="error-message">{{ blog_body_error }}</p>
+        </div>
+
+        <input type="submit" value="Submit"/>
+    </form>
+</main>
+
+{% endblock %}
