@@ -55,15 +55,16 @@ def newpost():
 
 @app.route('/blog', methods=['GET'])
 def blog():
-    blog = []
+    blogs = []
     blog_id = request.args.get('id')
 
-    if request.args:
-        blog_id = request.args.get('id')
-        blog = Blog.query.filter_by(id=blog_id).first()
-        return render_template('blog.html', blog=blog)
-    else:
-        return render_template('titlebody.html', blog=blog)
+    blogs = Blog.query.all()
 
+    if request.args.get('id'):
+        blog_id = request.args.get('id')
+        #blog = Blog.query.filter_by(id=blog_id).first()
+        return render_template('blog.html', blogs=blogs)
+    else:
+        return render_template('titlebody.html', blogs=blogs) #else loop over every blog in blogs, printing out the blog’s attributes
 if __name__ == '__main__':
     app.run()

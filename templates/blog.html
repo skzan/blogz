@@ -6,12 +6,13 @@
     <div>
         <h1>Build A Blog</h1>
         <form method="GET" action="/blog">
+          {% if not blog %}
             <p>No post yet</p>
             <ul>
-
-                    <a href="/blog?id={{blog.id}}">{{ blog.title }}</a>
-                        <ul>
-                            <li class="blog-post-body">{{ blog.body }}</li>
+          {% else %}
+                    <a href="/blog?id={{blog.id}}">{{ blog.title }}</a> # this needs to be a <li> list item
+                        <ul> 
+                            <li class="blog-post-body">{{ blog.body }}</li> # with the body in it
                               <div><small>By:
                                 <a href="{{ url_for('blog', blog=blog.id )}}" class="author">{{ blog.title }}</a>
                               </div>
@@ -19,8 +20,8 @@
                     </li>
                   <br>
                   <hr/>
-          
             </ul>
+          {% endif %}
           </form>
     </div>
 </main>
