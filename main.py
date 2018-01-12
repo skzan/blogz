@@ -8,7 +8,7 @@ app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:root@localhost:8889/build-a-blog'
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
-app.secret_key = 'root'
+#app.secret_key = 'root'
 
 class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -20,7 +20,7 @@ class Blog(db.Model):
 
 @app.route('/')
 def index():
-    user_id = request.args.get('id')
+    #user_id = request.args.get('id')
     blogs = Blog.query.all() # blogs is a list of <Blog>
     for blog in blogs :
         print("title: ", blog.title, "body", blog.body)
@@ -56,13 +56,13 @@ def newpost():
 @app.route('/blog', methods=['GET'])
 def blog():
     blogs = []
-    blog_id = request.args.get('id')
+    #blog_id = request.args.get('id')
 
-    blogs = Blog.query.all()
+    #blogs = Blog.query.all()
 
     if request.args.get('id'):
         blog_id = request.args.get('id')
-        #blog = Blog.query.filter_by(id=blog_id).first()
+        blogs = Blog.query.filter_by(id=blog_id).all()#first()
         return render_template('blog.html', blogs=blogs)
     else:
         return render_template('titlebody.html', blogs=blogs) #else loop over every blog in blogs, printing out the blog’s attributes

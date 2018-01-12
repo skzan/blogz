@@ -8,11 +8,10 @@
         <form method="GET" action="/blog">
           {% if not blog %}
             <p>No post yet</p>
-            <ul>
           {% else %}
-                    <a href="/blog?id={{blog.id}}">{{ blog.title }}</a> # this needs to be a <li> list item
-                        <ul> 
-                            <li class="blog-post-body">{{ blog.body }}</li> # with the body in it
+            <ul>
+              <li><a href="{{ url_for('blog', id=blog.id) }}">{{ blog.title }}</a></li>
+                <li><p class="blog-post-body">{{ blog.body }}</p></li>
                               <div><small>By:
                                 <a href="{{ url_for('blog', blog=blog.id )}}" class="author">{{ blog.title }}</a>
                               </div>
@@ -20,6 +19,7 @@
                     </li>
                   <br>
                   <hr/>
+
             </ul>
           {% endif %}
           </form>
