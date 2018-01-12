@@ -63,9 +63,9 @@ def blog():
     if request.args.get('id'):
         blog_id = request.args.get('id')
         blogs = Blog.query.filter_by(id=blog_id).all()#first()
-        return render_template('blog.html', blogs=blogs)
+        return render_template('titlebody.html', blogs=blogs)
     else:
         blogs = Blog.query.all()
-        return render_template('titlebody.html', blogs=blogs) #else loop over every blog in blogs, printing out the blog’s attributes
+        return render_template('blog.html', blogs=blogs) #else loop over every blog in blogs, printing out the blog’s attributes
 if __name__ == '__main__':
     app.run()
