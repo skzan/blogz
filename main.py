@@ -38,12 +38,12 @@ def newpost():
 
         if len(blog_title) <= 0:
             blog_title_error = "Please include a blog title"
-            return render_template('newpost.html', form=form, blog_title_error=blog_title_error)
+            return render_template('newpost.html', blog_title_error=blog_title_error)
 
 
         if len(blog_body) <= 0:
             body_error = "Please include a post body"
-            return render_template('newpost.html', form=form, body_error=body_error)
+            return render_template('newpost.html', blog_body_error=body_error)
 
         new_blog = Blog(blog_title, blog_body)
         db.session.add(new_blog)
