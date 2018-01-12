@@ -2,28 +2,21 @@
 
 {% block content %}
 
-<main class="container">
-    <div>
-        <h1>Build A Blog</h1>
-        <form method="GET" action="/blog">
-          {% if not blog %}
-            <p>No post yet</p>
-          {% else %}
-            <ul>
-              <li><a href="{{ url_for('blog', id=blog.id) }}">{{ blog.title }}</a></li>
-                <li><p class="blog-post-body">{{ blog.body }}</p></li>
-                              <div><small>By:
-                                <a href="{{ url_for('blog', blog=blog.id )}}" class="author">{{ blog.title }}</a>
-                              </div>
-                        </ul>
-                    </li>
-                  <br>
-                  <hr/>
+    <h2>Blog Entry</h2>
 
-            </ul>
-          {% endif %}
-          </form>
-    </div>
-</main>
-<p>Blog</p>
+    {% if blogs|length == 0 %}
+    <p>No blog posts</p>
+
+    {% else %}
+
+        {% for blog in blogs %}
+            <a href="./blog?id={{blog.id}}">
+                <h3>{{blog.title}}</h3>
+            </a>
+            <p>{{blog.body}}</p>
+            <hr />
+        {% endfor %}
+
+    {% endif %}
+
 {% endblock %}
