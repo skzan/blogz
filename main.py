@@ -59,8 +59,8 @@ def blog():
     blog_id = request.args.get('id')
 
     if request.args:
-        #blog_id = request.args.get('id')
-        #blog = Blog.query.filter_by(id=blog_id).first()
+        blog_id = request.args.get('id')
+        blog = Blog.query.filter_by(id=blog_id).first()
         return render_template('blog.html', blog=blog)
     else:
         return render_template('titlebody.html', blog=blog)

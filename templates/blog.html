@@ -8,7 +8,7 @@
         <form method="GET" action="/blog">
             <p>No post yet</p>
             <ul>
-                {% for blog in blogs %}
+
                     <a href="/blog?id={{blog.id}}">{{ blog.title }}</a>
                         <ul>
                             <li class="blog-post-body">{{ blog.body }}</li>
@@ -19,7 +19,7 @@
                     </li>
                   <br>
                   <hr/>
-                {% endfor %}
+          
             </ul>
           </form>
     </div>
