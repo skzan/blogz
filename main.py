@@ -35,12 +35,13 @@ def require_login():
     if request.endpoint not in allowed_routes and 'username' not in session:
         return redirect('/login')
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def index():
-    blogs = Blog.query.all() # blogs is a list of <Blog>
-    for blog in blogs :
-        print("title: ", blog.title, "body", blog.body)
-    return render_template('index.html', title="build-a-blog", blogs=blogs)
+    blogs = Blog.query.all()
+    user_id = request.args.get('id')
+    users = User.query.all()
+    usernames = request.args.get('username')
+    return render_template('index.html', users=users)
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def newpost():
@@ -68,6 +69,13 @@ def newpost():
 
         return redirect('/blog?id={}'.format(new_blog.id))
     return render_template('newpost.html')
+
+@app.route('/user_blog', methods=['POST', 'GET'])
+def user_blog():
+    blog_post_value = request.args.get('id')
+    userID = request.args.get('user')
+    user = User.query.filter_by(username=userID).first()
+    return render_template('user.html', blogs=get_user_blogs(userID))
 
 @app.route('/blog', methods=['GET'])
 def blog():
