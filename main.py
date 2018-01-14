@@ -79,18 +79,24 @@ def user_blog():
 
 @app.route('/blog', methods=['GET'])
 def blog():
-    blogs = []
+    user_name = request.args.get('user')
+    blog_id = request.args.get('id')
     #blog_id = request.args.get('id')
 
     #blogs = Blog.query.all()
 
-    if request.args.get('id'):
-        blog_id = request.args.get('id')
-        blogs = Blog.query.filter_by(id=blog_id).all()#first()
-        return render_template('titlebody.html', blogs=blogs)
-    else:
+    if user_name:
+        user = db.session.query(User).filter_by(username = user_name).first()
         blogs = Blog.query.all()
-        return render_template('blog.html', blogs=blogs) #else loop over every blog in blogs, printing out the blog’s attributes
+        return render_template("blog.html", user = user, blogs=user.blogs)
+    if blog_id:
+        #blog_id = request.args.get('id')
+        blog = db.session.query(Blog).filter_by(id = blog_id).first()
+        user = db.session.query(User).filter_by(username = user_name).first()
+        #blogs = Blog.query.filter_by(id=blog_id).all()#first()
+        return render_template('titlebody.html', blog=blog, user=user)
+    blogs = Blog.query.all()
+    return render_template('blog.html', blogs=blogs) #else loop over every blog in blogs, printing out the blog’s attributes
 
 @app.route("/signup", methods=['POST', 'GET'])
 def signup():
